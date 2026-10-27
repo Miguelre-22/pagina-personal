@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-labelledby="titulo-avatar">
   <title id="titulo-avatar">Avatar de Miguel Re Ibarra: iniciales MR</title>
   <!-- Anillo fino exterior (color acento) -->
-  <circle cx="60" cy="60" r="57" fill="none" stroke="#C2410C" stroke-width="3"/>
+  <circle cx="60" cy="60" r="57" fill="none" stroke="#6D28D9" stroke-width="3"/>
   <!-- Círculo relleno (color primario) -->
   <circle cx="60" cy="60" r="51" fill="#1E3A5F"/>
   <!-- Iniciales en Georgia (color fondo) -->
