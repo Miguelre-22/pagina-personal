@@ -1,0 +1,89 @@
+# Nombre del workflow que aparece en la pestaña Actions
+name: Tests y despliegue en GitHub Pages
+
+# Cuándo se ejecuta:
+# - push a main: tests y, si pasan, despliegue
+# - pull_request hacia main: solo tests (para revisar antes de fusionar)
+# - workflow_dispatch: botón "Run workflow" para lanzarlo a mano
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Permisos mínimos por defecto: el token solo puede leer el repositorio
+permissions:
+  contents: read
+
+# Evita dos ejecuciones simultáneas sobre la misma rama/PR.
+# cancel-in-progress: false => no se interrumpe un despliegue que ya ha empezado
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # ---------- Job 1: validar el HTML y ejecutar los tests ----------
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      # Descarga el código del repositorio en la máquina virtual
+      - name: Descargar el código
+        uses: actions/checkout@v7
+
+      # Instala Node.js 22 y guarda en caché las dependencias de npm
+      - name: Configurar Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      # Instala exactamente las versiones de package-lock.json
+      - name: Instalar dependencias
+        run: npm ci
+
+      # html-validate + tests de node:test
+      - name: Ejecutar los tests
+        run: npm test
+
+  # ---------- Job 2: publicar site/ en GitHub Pages ----------
+  despliegue:
+    # Solo empieza si el job "tests" ha terminado en verde
+    needs: tests
+    # Solo se despliega desde main y nunca en un pull request
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    # Permisos extra únicamente para este job:
+    # - contents: read  para descargar el código
+    # - pages: write    para publicar en GitHub Pages
+    # - id-token: write para que GitHub Pages verifique la identidad del workflow (OIDC)
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    # Entorno de despliegue: muestra la URL publicada en el resumen de la ejecución
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      # Descarga el código del repositorio
+      - name: Descargar el código
+        uses: actions/checkout@v7
+
+      # Prepara la configuración de GitHub Pages
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v6
+
+      # Empaqueta SOLO la carpeta site/ (tests y configuración no se publican)
+      - name: Subir la carpeta site/
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      # Publica el paquete en GitHub Pages
+      - name: Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

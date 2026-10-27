@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Proyectos de Miguel Re Ibarra, estudiante de DAW: aplicaciones web, CI/CD y ejercicios de servidor.">
+  <title>Proyectos · Miguel Re Ibarra</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="icon" href="img/avatar.svg" type="image/svg+xml">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <header class="cabecera" id="arriba">
+    <div class="cabecera__identidad">
+      <img class="avatar" src="img/avatar.svg" alt="Avatar de Miguel Re Ibarra con sus iniciales MR" width="96" height="96">
+      <div>
+        <h1>Miguel Re Ibarra</h1>
+        <p class="titular">Estudiante de DAW · Desarrollo web accesible</p>
+      </div>
+    </div>
+    <nav class="menu" aria-label="Menú principal">
+      <ul>
+        <li><a href="index.html#sobre-mi">Sobre mí</a></li>
+        <li><a href="index.html#formacion">Formación</a></li>
+        <li><a href="index.html#habilidades">Habilidades</a></li>
+        <li><a href="proyectos.html">Proyectos</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contenido">
+    <p class="introduccion">Algunos de los proyectos que he desarrollado durante el ciclo. Todos tienen el código publicado en GitHub.</p>
+
+    <div class="rejilla-proyectos">
+      <article class="proyecto tarjeta">
+        <h2>PHP Words</h2>
+        <p>Tarjetas interactivas con las palabras reservadas de PHP, con buscador, filtro por categoría y selector de idioma.</p>
+        <ul class="tecnologias">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ul>
+        <a class="boton" href="https://github.com/Miguelre-22/php-words" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+      </article>
+
+      <article class="proyecto tarjeta">
+        <h2>Práctica CI/CD</h2>
+        <p>App Node.js con Express y tests automatizados, contenerizada con Docker y con pipeline en GitHub Actions.</p>
+        <ul class="tecnologias">
+          <li>Node.js</li>
+          <li>Express</li>
+          <li>Mocha</li>
+          <li>Docker</li>
+          <li>GitHub Actions</li>
+        </ul>
+        <a class="boton" href="https://github.com/Miguelre-22/practica_cicd" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+      </article>
+
+      <article class="proyecto tarjeta">
+        <h2>DWES 26-27</h2>
+        <p>Banco de ejercicios de Desarrollo Web en Entorno Servidor, organizado por unidades.</p>
+        <ul class="tecnologias">
+          <li>PHP</li>
+        </ul>
+        <a class="boton" href="https://github.com/Miguelre-22/DWES_26-27" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>© <span id="anio">2026</span> Miguel Re Ibarra</p>
+    <button type="button" class="boton" id="volver-arriba">Volver arriba</button>
+  </footer>
+</body>
+</html>
