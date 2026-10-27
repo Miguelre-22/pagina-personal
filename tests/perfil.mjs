@@ -20,7 +20,7 @@ export const PERFIL = {
     '--color-secundario': '#2F6F7E',
     '--color-fondo': '#F7F5F0',
     '--color-texto': '#1F2328',
-    '--color-acento': '#C2410C',
+    '--color-acento': '#6D28D9',
   },
 
   fuenteTitulos: 'Georgia',
